@@ -13,7 +13,7 @@
     "to": "Paris",
     "departure": "2020-03-20 21:40",
     "arrival": "2018-03-21 2:20",
-    "by": "ANA"
+    "by": "KLM"
   },
   {
     "id": "ISR-6099",
@@ -45,7 +45,7 @@
     "to": "Barcelona",
     "departure": "2018-02-25 21:40",
     "arrival": "2018-03-25 1:20",
-    "by": "El Al"
+    "by": "KLM"
   },
   {
     "id": "ISR-6390",
