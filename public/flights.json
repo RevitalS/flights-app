@@ -6,13 +6,62 @@
     "departure": "2018-02-25 21:40",
     "arrival": "2018-03-25 1:20",
     "by": "El Al"
-  }
+  },
   {
-    "id": "ISR-6090",
+    "id": "ISR-1234",
+    "from": "Barcelona",
+    "to": "Paris",
+    "departure": "2020-03-20 21:40",
+    "arrival": "2018-03-21 2:20",
+    "by": "ANA"
+  },
+  {
+    "id": "ISR-6099",
+    "from": "Tel-Aviv",
+    "to": "Paris",
+    "departure": "2018-02-25 21:40",
+    "arrival": "2018-03-25 1:20",
+    "by": "El Al"
+  },
+  {
+    "id": "ISR-5990",
+    "from": "New York City",
+    "to": "Tel-aviv",
+    "departure": "2018-02-25 21:40",
+    "arrival": "2018-03-25 1:20",
+    "by": "KLM"
+  },
+  {
+    "id": "ISR-6000",
+    "from": "Tel-Aviv",
+    "to": "New York City",
+    "departure": "2018-02-25 21:40",
+    "arrival": "2018-03-25 1:20",
+    "by": "Delta Air Lines"
+  },
+  {
+    "id": "ISR-6430",
     "from": "Tel-Aviv",
     "to": "Barcelona",
     "departure": "2018-02-25 21:40",
     "arrival": "2018-03-25 1:20",
     "by": "El Al"
+  },
+  {
+    "id": "ISR-6390",
+    "from": "Tel-Aviv",
+    "to": "Los Angeles",
+    "departure": "2018-02-25 21:40",
+    "arrival": "2018-03-25 1:20",
+    "by": "KLM"
+  },
+  {
+    "id": "ISR-6290",
+    "from": "Los Angeles",
+    "to": "Barcelona",
+    "departure": "2018-02-25 21:40",
+    "arrival": "2018-03-25 1:20",
+    "by": "Delta Air Lines"
   }
+  
 ]
