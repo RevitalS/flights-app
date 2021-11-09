@@ -8,38 +8,23 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+
     <div class="container">
+
       <input class="checkbox" type="checkbox" id="from" name="from" />
       <label for="from">from this city</label>
       <input type="text" id="fromText" />
       <br />
+
       <input class="checkbox" type="checkbox" id="by" name="by" />
       <label for="from">by this company</label>
       <input type="text" id="byText" />
       <br />
+
       <button id="filter">Filter</button>
+      <p id="output"></p>
+      
     </div>
-    <script>
-      const click = document.getElementById("filter");
-      click.addEventListener("click", sendFilter);
-      function sendFilter() {
-        let filter1 = "";
-        let filter2 = "";
-        const filters = Array.from(document.querySelectorAll(".checkbox"));
-        if (filters[0].checked == true) {
-          const from = document.getElementById("fromText").value;
-          filter1 += "from=" + from;
-        }
-        if (filters[1].checked == true) {
-          const by = document.getElementById("byText").value;
-          filter2 += "by=" + by;
-        }
-        fetch("flights.json?" + filter1 + "&" + filter2)
-          .then((response) => response.json())
-          .then((flight) => {
-            console.log(flight);
-          });
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
