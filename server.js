@@ -1,6 +1,10 @@
 const http = require('http');
 const fs = require('fs');
+const url = require('url');
 
+//const filghts = require('public/filghts.json');
+
+//console.log(filghts);
 const types = {
   js: 'text/javascript',
   html: 'text/html',
@@ -10,6 +14,7 @@ const types = {
 
 http
   .createServer(function (req, res) {
+    const parseUrl = url.parse(req.url);
     if (req.url === '/') {
       fs.readFile('public/index.html', function (err, data) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -17,9 +22,12 @@ http
         res.end();
       });
     } else {
-      const suffix = parseUrl(req.url);
+      const suffix = getUrlSuffix(parseUrl.pathname);
       if (suffix in types) {
-        readFileByType(res, req.url, suffix);
+        if (suffix === 'json') {
+          getJsonFile(parseUrl.pathname, parseUrl.query);
+        }
+        readFileByType(res, parseUrl.pathname, suffix);
       }
     }
   })
@@ -27,16 +35,51 @@ http
     console.log('Client is available at http://localhost:8080');
   });
 
-function parseUrl(url) {
+function getUrlSuffix(url) {
   const suffix = url.split('.').pop();
-  console.log(suffix);
   return suffix;
 }
 
 function readFileByType(res, url, prefix) {
   fs.readFile(`public${url}`, function (err, data) {
-    res.writeHead(200, { 'Content-Type': types[prefix] });
-    res.write(data);
-    res.end();
+    if (err) {
+      if (err.code === 'ENOENT') {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.write('File not found');
+      } else {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.write('Server Have problem');
+      }
+    } else {
+      res.writeHead(200, { 'Content-Type': types[prefix] });
+      res.write(data);
+      res.end();
+    }
   });
+}
+
+function filteredFlightsJson() {
+
+}
+
+function getJsonFile(url, query) {
+
+  const jsonData = fs.readFile(`public${url}`, function (err, data) {
+    const jData = JSON.parse(data);
+    res.write(jData);
+    res.end();
+  })
+}
+
+function parseQuery(querys) {
+  if (querys.length === 0) {
+    return false;
+  }
+  const q = {}
+  const queryList = querys.split('&');
+  queryList.map((query) => {
+    const taple = query.split('=');
+    q[taple[0]] = taple[1];
+  })
+  return q;
 }
