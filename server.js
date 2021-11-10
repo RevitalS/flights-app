@@ -66,7 +66,7 @@ function getJsonFile(url, query) {
 
   const jsonData = fs.readFile(`public${url}`, function (err, data) {
     const jData = JSON.parse(data);
-    res.write(jData);
+    res.write(JSON.stringify(jData));
     res.end();
   })
 }
