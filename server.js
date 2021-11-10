@@ -25,7 +25,7 @@ http
       const suffix = getUrlSuffix(parseUrl.pathname);
       if (suffix in types) {
         if (suffix === 'json') {
-          getJsonFile(parseUrl.pathname, parseUrl.query);
+          getJsonFile(parseUrl.pathname, parseUrl.query, res);
         }
         readFileByType(res, parseUrl.pathname, suffix);
       }
@@ -62,7 +62,7 @@ function filteredFlightsJson() {
 
 }
 
-function getJsonFile(url, query) {
+function getJsonFile(url, query, res) {
 
   const jsonData = fs.readFile(`public${url}`, function (err, data) {
     const jData = JSON.parse(data);
