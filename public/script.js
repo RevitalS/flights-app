@@ -1,17 +1,17 @@
-function showUsers(flight) {
+function showFlights(flight) {
   const postsFlights = flight.map(
     (fly) => `
             <li>
-                <p>"${flight.id}"</p>
-                <p>${flight.from}</p>
-                <p>${flight.to}</p>
-                <p>${flight.departure}</p>
-                <p>${flight.arrival}</p>
-                <p>${flight.by}</p>
+                <p>"${fly.id}"</p>
+                <p>${fly.from}</p>
+                <p>${fly.to}</p>
+                <p>${fly.departure}</p>
+                <p>${fly.arrival}</p>
+                <p>${fly.by}</p>
             </li>
         `
   );
-  output.innerHTML = postsContent.join(" ");
+  output.innerHTML = postsFlights.join(" ");
 }
 
 const click = document.getElementById("filter");
@@ -28,6 +28,7 @@ function sendFilter() {
     const by = document.getElementById("byText").value;
     filter2 += "by=" + by;
   }
+
   fetch("flights.json?" + filter1 + "&" + filter2)
     .then((response) => response.json())
     .then((flight) => {
