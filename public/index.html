@@ -10,20 +10,27 @@
   <body>
 
     <div class="container">
+      <div class="filter">
+        <div>
+        <input class="checkbox" type="checkbox" id="from" name="from" />
+        <label for="from">from this city</label>
+        <input type="text" id="fromText" />
+        </div>
 
-      <input class="checkbox" type="checkbox" id="from" name="from" />
-      <label for="from">from this city</label>
-      <input type="text" id="fromText" />
-      <br />
+        <div>
+        <input class="checkbox" type="checkbox" id="by" name="by" />
+        <label for="from">by this company</label>
+        <input type="text" id="byText" />
+        </div>
 
-      <input class="checkbox" type="checkbox" id="by" name="by" />
-      <label for="from">by this company</label>
-      <input type="text" id="byText" />
-      <br />
+        <div>
+        <button id="filter">Filter</button>
+        </div>
 
-      <button id="filter">Filter</button>
+      </div>
+
       <p id="output"></p>
-      
+
     </div>
     <script src="script.js"></script>
   </body>

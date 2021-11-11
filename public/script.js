@@ -2,12 +2,12 @@ function showFlights(flight) {
   const postsFlights = flight.map(
     (fly) => `
             <li>
-                <p>"${fly.id}"</p>
-                <p>${fly.from}</p>
-                <p>${fly.to}</p>
-                <p>${fly.departure}</p>
-                <p>${fly.arrival}</p>
-                <p>${fly.by}</p>
+                <div>"${fly.id}"</div>
+                <div>${fly.from}</div>
+                <div>${fly.to}</div>
+                <div>${fly.departure}</div>
+                <div>${fly.arrival}</div>
+                <div>${fly.by}</div>
             </li>
         `
   );
