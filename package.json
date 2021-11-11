@@ -1,0 +1,23 @@
+{
+  "name": "flights-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "checking.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RevitalS/flights-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RevitalS/flights-app/issues"
+  },
+  "homepage": "https://github.com/RevitalS/flights-app#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

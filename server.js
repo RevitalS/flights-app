@@ -22,13 +22,7 @@ http
         res.end();
       });
     } else {
-      const suffix = getUrlSuffix(parseUrl.pathname);
-      if (suffix in types) {
-        if (suffix === 'json') {
-          getJsonFile(parseUrl.pathname, parseUrl.query, res);
-        }
-        readFileByType(res, parseUrl.pathname, suffix);
-      }
+      readFileByType(res, parseUrl.pathname, parseUrl.query);
     }
   })
   .listen(8080, function () {
@@ -40,7 +34,13 @@ function getUrlSuffix(url) {
   return suffix;
 }
 
-function readFileByType(res, url, prefix) {
+function readFileByType(res, url, query) {
+  const suffix = getUrlSuffix(url);
+  if (!(suffix in types)) {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.write('File not found');
+    return;
+  }
   fs.readFile(`public${url}`, function (err, data) {
     if (err) {
       if (err.code === 'ENOENT') {
@@ -51,35 +51,59 @@ function readFileByType(res, url, prefix) {
         res.write('Server Have problem');
       }
     } else {
-      res.writeHead(200, { 'Content-Type': types[prefix] });
-      res.write(data);
-      res.end();
+      if (suffix === 'json') {
+        hendleJsonFile(res, data, query);
+      } else {
+        res.writeHead(200, { 'Content-Type': types[suffix] });
+        res.write(data);
+        res.end();
+      }
     }
   });
 }
 
-function filteredFlightsJson() {
-
+function filteredFlights(flights, filterType, filterValue) {
+  console.log(flights[0][filterType]);
+  console.log(filterValue);
+  const result = flights.filter(
+    (flight) =>
+      getCheckingFormat(flight[filterType]) == getCheckingFormat(filterValue)
+  );
+  return result;
 }
 
-function getJsonFile(url, query, res) {
+function getCheckingFormat(str) {
+  str = str.toLowerCase();
+  return str.replace(/[^a-zA-Z ]+/g, '_');
+}
 
-  const jsonData = fs.readFile(`public${url}`, function (err, data) {
-    const jData = JSON.parse(data);
-    res.write(JSON.stringify(jData));
-    res.end();
-  })
+function hendleJsonFile(res, data, query) {
+  console.log('im here');
+  const queryObject = parseQuery(query);
+
+  const jData = JSON.parse(data);
+  let filghts = [];
+  console.log(queryObject , 'object');
+  queryObject.forEach((value, type) => {
+    filghts = [...filghts, ...filteredFlights(jData, type, value)];
+    console.log(filghts);
+  });
+  //const flight = filteredFlights(jData, queryObject[0].key(), queryObject[0].value)
+  res.write(JSON.stringify(filghts));
+  res.end();
 }
 
 function parseQuery(querys) {
   if (querys.length === 0) {
     return false;
   }
-  const q = {}
+  const map = new Map();
   const queryList = querys.split('&');
   queryList.map((query) => {
+    if (query.length > 0){
     const taple = query.split('=');
-    q[taple[0]] = taple[1];
-  })
-  return q;
+    map.set(taple[0], getCheckingFormat(taple[1]));
+    }
+  });
+  return map;
 }
